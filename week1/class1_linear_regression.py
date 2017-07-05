@@ -16,7 +16,15 @@ def plot_line(x, y, y_hat,line_color='blue'):
 
 def linear_grad_func(theta, x, y):
     # TODO compute gradient
-
+    m = y.size
+    it = np.ones(shape=(m, 2))
+    it[:, 1] = x[:, 0]
+    prediction = it.dot(theta[0]).flatten()
+    errors = (prediction - y) * it[:, 0]
+    errors2 = (prediction - y) * it[:, 1]
+    grad = theta
+    grad[0][0] = grad[0][0] - 0.01 * (1.0 / m) * errors.sum()
+    grad[0][1] = grad[0][1] - 0.01 * (1.0 / m) * errors2.sum()
     return grad
 
 
@@ -27,7 +35,12 @@ def linear_val_func(theta, x):
 
 def linear_cost_func(theta, x, y):
     # TODO compute cost (loss)
-
+    m = len(y)
+    it = np.ones(shape=(m, 2))
+    it[:, 1] = x[:, 0]
+    predictions = it.dot(theta[0]).flatten()
+    sqerrors = (predictions - y) ** 2
+    cost = (1.0 / (2 * m)) * sqerrors.sum()
     return cost
 
 
@@ -38,14 +51,13 @@ def linear_grad_desc(theta, X_train, Y_train, lr=0.1, max_iter=10000, converge_c
     cost_iter.append([0, cost])
     cost_change = 1
     i = 1
-    while cost_change > converge_change and i< max_iter:
+    while cost_change > converge_change and i < max_iter:
         pre_cost = cost
         # compute gradient
         grad = linear_grad_func(theta, X_train, Y_train)
 
         # TODO Update gradient
-
-
+        theta = grad
 
         cost = linear_cost_func(theta, X_train, Y_train)
         cost_iter.append([i, cost])
