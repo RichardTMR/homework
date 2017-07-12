@@ -2,8 +2,6 @@ import numpy as np
 from sklearn import linear_model, datasets
 import matplotlib.pyplot as plt
 
-
-# change the label to one hot vector
 def onehot(y):
     n = len(np.unique(y))
     m = y.shape[0]
@@ -13,32 +11,26 @@ def onehot(y):
     return b
 
 
-#TODO softmax function
 def softmax(X):
-    return None
+    return (np.exp(X).T / np.sum(np.exp(X), axis=1)).T
 
 
-# TODO hypothesis function
 def h_func(theta, X):
-    return None
+    h = np.dot(np.c_[np.ones(X.shape[0]), X], theta)
+    return softmax(h)
 
 
 def h_gradient(theta, X, y, lam=0.1):
     n = X.shape[0]
     y_mat = onehot(y)
     preds = h_func(theta, X)
-
-    # TODO compute gradient
-    return None
-
+    return -1./n * np.dot(np.c_[np.ones(n), X].T, y_mat - preds) + lam * theta
 
 
 def softmax_cost_func(theta, X, y, lam=0.1):
     n = X.shape[0]
     y_mat = onehot(y)
-
-    # TODO compute loss (cost)
-    return None
+    return -1./n * np.sum(y_mat * np.log(h_func(theta, X))) + lam/2. * np.sum(theta * theta)
 
 
 # gradient descent
