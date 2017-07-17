@@ -5,6 +5,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 import sklearn.linear_model as linear_model
 import sklearn.metrics as metrics
+from sklearn import svm
 
 
 # Encode the categorical features as numbers
@@ -25,7 +26,7 @@ if __name__ == '__main__':
             "Age", "Workclass", "fnlwgt", "Education", "Education-Num", "Martial Status",
             "Occupation", "Relationship", "Race", "Sex", "Capital Gain", "Capital Loss",
             "Hours per week", "Country", "Target"],
-        sep=r'\s*,\s*',
+        sep=r',\s',
         engine='python',
         na_values="?")
 
@@ -66,7 +67,8 @@ if __name__ == '__main__':
     print '\n'
 
     # Define model
-    cls = linear_model.LogisticRegression()
+    # cls = linear_model.LogisticRegression()
+    cls = svm.SVC()
 
     cls.fit(X_train, y_train)
     y_pred = cls.predict(X_test)
