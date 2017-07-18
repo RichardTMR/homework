@@ -13,10 +13,12 @@ original_data = pd.read_csv(
         sep=',',
         engine='python').values
 
-input_data, test_data, target_data, test_target = train_test_split(
+train_data, test_data, target_data, test_target = train_test_split(
     original_data[:, :-1], original_data[:, -1:], train_size=0.75)
-m = min(len(input_data[0]), random.randint(50, 256))  # 训练数据点数目
-features = len(input_data[0])
+m = min(len(train_data[0]), random.randint(50, 256))  # 训练数据点数目
+features = len(train_data[0])
+
+input_data = np.c_[np.ones(features), train_data]
 
 # 两种终止条件
 loop_max = 10000  # 最大迭代次数(防止死循环)
@@ -56,7 +58,7 @@ while count < loop_max:
 # ----------------------------------------------------------------------------------------------------------------------
 
 regressor = LinearRegression()
-regressor.fit(input_data, target_data)
+regressor.fit(train_data, target_data)
 
 print regressor.score(test_data, test_target)
 
