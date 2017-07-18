@@ -16,9 +16,10 @@ original_data = pd.read_csv(
 train_data, test_data, target_data, test_target = train_test_split(
     original_data[:, :-1], original_data[:, -1:], train_size=0.75)
 m = min(len(train_data[0]), random.randint(50, 256))  # 训练数据点数目
-features = len(train_data[0])
 
-input_data = np.c_[np.ones(features), train_data]
+input_data = np.c_[np.ones(len(train_data)), train_data]
+# input_data = train_data
+features = len(input_data[0])
 
 # 两种终止条件
 loop_max = 10000  # 最大迭代次数(防止死循环)
@@ -43,7 +44,7 @@ while count < loop_max:
     sum_m = np.zeros(features)
 
     for i in range(m):
-        diff = (np.dot(w, input_data[i]) - target_data[i]) * target_data[i]  # 训练集代入,计算误差值
+        diff = (np.dot(input_data[i], w) - target_data[i]) * target_data[i]  # 训练集代入,计算误差值
         # 采用min-BGD,对部分样例求和
         sum_m = sum_m + diff
 
