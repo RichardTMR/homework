@@ -11,8 +11,9 @@ if __name__ == "__main__":
     train_iter, val_iter = get_mnist(batch_size)
 
     # Get symbol
-    model = get_mlp_sym()
+    # model = get_mlp_sym()
     # todo: model = get_conv_sym()
+    model = get_conv_sym()
 
     # Viz the graph and save the plot for debugging
     plot = mx.viz.plot_network(model, title="mlp", save_format="pdf", hide_weights=True)
