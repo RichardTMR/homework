@@ -1,12 +1,10 @@
 import mxnet as mx
-import numpy as np
-import cv2
 import logging
 from data import get_mnist
 from mlp_sym import get_mlp_sym
 logging.getLogger().setLevel(logging.DEBUG)  # logging to stdout
 
-if __name__=="__main__":
+if __name__ == "__main__":
 
     # Get the data iterator
     batch_size = 100
