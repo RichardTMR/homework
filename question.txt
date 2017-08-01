@@ -1,2 +1,5 @@
 Embedding space
 mxnet data need NDarrary met 
+
+304: [16:36:58] src/io/image_aug_default.cc:282: Check failed: static_cast<index_t>(res.rows) >= param_.data_shape[1] && static_cast<index_t>(res.cols) >= param_.data_shape[2] input image size smaller than input shape
+
