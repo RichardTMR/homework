@@ -7,7 +7,7 @@ def onehot(y):
     m = y.shape[0]
     b = np.zeros((m, n))
     for i in xrange(m):
-        b[i,y[i]] = 1
+        b[i, y[i]] = 1
     return b
 
 

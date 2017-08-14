@@ -162,11 +162,11 @@ class MLP:
                 #TODO call forward function
                 #TODO call backward function
 
-            if i % self.verbose == 0:
-                # Compute Loss and Training Accuracy
-                loss = self.compute_loss(X, y)
-                acc = self.score(X, y)
-                print('Epoch {}: loss = {}, accuracy = {}'.format(i, loss, acc))
+                if i % self.verbose == 0:
+                    # Compute Loss and Training Accuracy
+                    loss = self.compute_loss(X, y)
+                    acc = self.score(X, y)
+                    print('Epoch {}: loss = {}, accuracy = {}'.format(i, loss, acc))
 
         return self
 

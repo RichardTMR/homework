@@ -2,6 +2,7 @@ import mxnet as mx
 import logging
 from data import get_mnist
 from mlp_sym import get_mlp_sym
+from mlp_sym import get_conv_sym
 logging.getLogger().setLevel(logging.DEBUG)  # logging to stdout
 
 if __name__ == "__main__":
